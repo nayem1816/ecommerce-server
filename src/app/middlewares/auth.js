@@ -21,11 +21,6 @@ const auth =
 
       req.user = user;
 
-      // // Role-based authorization check
-      if (requiredRoles.length && !requiredRoles.includes(verifiedUser.role)) {
-        throw new ApiError(403, "Forbidden");
-      }
-
       next();
     } catch (error) {
       next(error);

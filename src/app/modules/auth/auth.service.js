@@ -9,14 +9,13 @@ const loginService = async (payload) => {
 
   const isExistUser = await User.findOne({
     email,
-    status: "active",
   });
 
   if (!isExistUser) {
     throw new ApiError(400, "User does not exist");
   }
 
-  const { _id, role } = isExistUser;
+  const { _id } = isExistUser;
 
   const isMatchPassword = await bcrypt.compare(password, isExistUser.password);
 
@@ -25,13 +24,13 @@ const loginService = async (payload) => {
   }
 
   const accessToken = jwtHelpers.createToken(
-    { _id, email, role },
+    { _id, email },
     config.jwt.secret,
     config.jwt.expires_in
   );
 
   const refreshToken = jwtHelpers.createToken(
-    { _id, email, role },
+    { _id, email },
     config.jwt.refresh_secret,
     config.jwt.refresh_expires_in
   );
