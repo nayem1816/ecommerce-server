@@ -10,7 +10,7 @@ const app = express();
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "*",
+    origin: "https://ecommerce-client-blond.vercel.app",
     credentials: true,
   })
 );
